@@ -1,4 +1,4 @@
-angular.module('planYourRide', ['planYourRide.tripPlanner'])
+angular.module('planYourRide', ['planYourRide.tripPlanner', 'ngRoute'])
   
 .config(function ($routeProvider, $httpProvider) {
   $routeProvider

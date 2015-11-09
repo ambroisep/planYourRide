@@ -1,4 +1,4 @@
-angular.module('planYourRide.tripPlanner')
+angular.module('planYourRide.tripPlanner', [])
 
 .controller('TripPlanner', function ($scope) {
 
