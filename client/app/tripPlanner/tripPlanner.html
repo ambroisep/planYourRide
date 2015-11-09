@@ -1,7 +1,13 @@
 <div id="planTrip">
   <h2>Help us organize your bike trip for you</h2>
-  <form name="signinForm" ng-submit="submitTrip()">
-    <input type="text" ng-model="tripData.time">
+  <form class="planTripForm" ng-submit="submitTrip()">
+    <div>
+      <span>I have </span>
+      <input type="number" min="0" max="12" ng-model="tripData.hours" placeholder="hh">
+      <span> hours and </span>
+      <input type="number" min="0" max="59" ng-model="tripData.minutes" placeholder="mn">
+      <span> minutes to ride.</span>
+    </div>
     <input type="text" ng-model="tripData.startPoint">
     <input type="text" ng-model="tripData.endPoint">
     <button>Tell me were to go!</button>
