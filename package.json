@@ -2,10 +2,11 @@
   "name": "planYourRide",
   "version": "0.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "./server/server.js",
   "pre-commit": "lint",
   "dependencies": {
     "body-parser": "^1.14.1",
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "serve-favicon": "^2.3.0"
   }
 }
