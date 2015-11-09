@@ -48,7 +48,7 @@ table {
 /*END RESET */
 
 #container {
-  width: 600px;
+  width: 90%);
   height: 100%;
   position: absolute;
   top: 0;
@@ -76,10 +76,17 @@ h1 {
   padding-bottom: 36px;
 }
 
-input {
-  text-align: center;
-  line-height: 55px;
+h2 {
+  font-size: 24pt;
   font-family: 'Helvetica', serif;
-  font-size: 32pt;
+  text-align: left;
+  padding-bottom: 24px;
+}
+
+input {
+ /* text-align: center;*/
+  line-height: 40px;
+  font-family: 'Helvetica', serif;
+  font-size: 20pt;
 }
 
