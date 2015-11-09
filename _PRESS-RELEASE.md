@@ -1,4 +1,4 @@
-# Project Name #
+# PlanYourRide #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -16,29 +16,30 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
  
-## Heading ##
+<!-- ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
-
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+ -->
+## Tell us how much time you have, we plan a nice bike trip ##
+  > Our tool helps cycling fans, to prepare trips with a tight time schedule.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > Enter your location, the time you have to ride, the direction you want to explore, and the type of trip you want to do (avoid or not d+), and we suggest several trips that you can export to your GPS or mobile app.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Tired of doing always the same bike ride when don't have much time? Complicated to plan you trip on a last minute basis when you are already ready to go? Here we are, offering you to handle this for you, and let you enjoy your ride.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > We combine Strava and Google Maps API, to find popular and nices rides to do, and use the rider's input to choose an itinerary thats suits for him.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > The modern way of planing bike trips. We do the search for the rider, he enjoys.
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Just enable locations, write the time you have, and get on you bike!
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > In 2 clicks, I was able to organize my lunch break and discover a new beautiful route that I had never seen before! Thanks PlanYourRide!
 
-## Closing and Call to Action ##
+<!-- ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+ -->
