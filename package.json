@@ -1,0 +1,11 @@
+{
+  "name": "planYourRide",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "pre-commit": "lint",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3"
+  }
+}
