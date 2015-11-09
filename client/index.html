@@ -3,17 +3,20 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Plan You Ride</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Plan Your Ride</title>
+  <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
   <script src="lib/angular/angular.js"></script>
-
+  <script src="app/tripPlanner/tripPlanner.js"></script>
   <script src="app/app.js"></script>
 
   <div id="container">
-    <div id="app"></div>
+    
+    <h1>Plan Your Ride</h1>
+
+    <div id="app" ng-view></div>
   </div>
 
 </body>
