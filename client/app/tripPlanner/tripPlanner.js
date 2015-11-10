@@ -1,6 +1,6 @@
 angular.module('planYourRide.tripPlanner', [])
 
-.controller('TripPlanner', function ($scope, $location,Directions) {
+.controller('TripPlanner', function ($scope, $location, Directions) {
 
   $scope.tripData = {};
   $scope.submitTrip = function () {

@@ -109,3 +109,8 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
   width: 36px;
 }
+
+#map {
+    height:420px;
+    width:600px;
+}
