@@ -1,7 +1,7 @@
 angular.module('planYourRide.directionRenderer', [])
 
-.controller('DirectionRenderer', function ($scope, Directions) {
-  $scope.directionData = "https://www.google.com/maps/embed/v1/directions?origin='San Francisco'&destination='Los Angeles'&key=AIzaSyD23psOeUzyr1lGl2pPZDc0vBxPgW0lsPY";
+.controller('DirectionRenderer', function ($scope, $sce, Directions) {
+  $scope.directionData = $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/directions?origin='San Francisco'&destination='Los Angeles'&key=AIzaSyD23psOeUzyr1lGl2pPZDc0vBxPgW0lsPY");
   $scope.retrieveDirection = function () {
     Directions.getDirections()
       .then(function(resp) {
