@@ -7,6 +7,7 @@ module.exports = function (app, express) {
   app.use(bodyParser.json());
   app.use(favicon(__dirname + '/../../client/assets/favicon.ico'));
   app.use(express.static(__dirname + '/../../client'));
+
   app.get('/test', function (req, res) {
     Gmaps.getItinerary({origin: 'San Frncisco, CA',
       destination: 'Los Angeles, CA'})
@@ -15,4 +16,6 @@ module.exports = function (app, express) {
         res.send(itinerary);
       });
   });
+
+  app.post('')
 };
