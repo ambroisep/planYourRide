@@ -8,6 +8,7 @@ exports.getItinerary = function(params, callback) {
     qs: {
       origin: params.origin,
       destination: params.destination,
+      mode: 'bicycling',
       key: 'AIzaSyBQs4N37ZBvQGPqcYdZVKUPTvfHS-AKLZQ'
     },
     json: true
