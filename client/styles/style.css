@@ -84,9 +84,10 @@ h2 {
 }
 
 input, .planTripForm {
-  line-height: 40px;
+  line-height: 30px;
   font-family: 'Helvetica', serif;
   font-size: 20pt;
+  margin-bottom: 10px;
 }
 
 input[type=number]::-webkit-inner-spin-button, 

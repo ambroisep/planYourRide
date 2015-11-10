@@ -6,10 +6,14 @@
       <input type="number" min="0" max="12" ng-model="tripData.hours" placeholder="hh">
       <span> hours and </span>
       <input type="number" min="0" max="59" ng-model="tripData.minutes" placeholder="mn">
-      <span> minutes to ride.</span>
+      <span> minutes for a ride.</span>
     </div>
-    <input type="text" ng-model="tripData.startPoint">
-    <input type="text" ng-model="tripData.endPoint">
+    <div>
+    <input type="text" ng-model="tripData.startPoint" placeholder="I want to start from">
+    </div>
+    <div>
+    <input type="text" ng-model="tripData.endPoint" placeholder="I would like to go to">
+    </div>
     <button>Tell me were to go!</button>
   </form>
 </div>
