@@ -21,6 +21,16 @@ module.exports = function (app, express) {
     map.destination = req.body.endPoint;
     console.log(map);
     res.send();
-    // origin='San Francisco'&destination='Los Angeles'
-  })
+  });
+
+   app.get('/trip', function (req, res) {
+    console.log(map);
+    Gmaps.getItinerary(map)
+      .then(function (googleMap) {
+        res.send(googleMap);
+      })
+      .catch(function (err) {
+        res.send(err);
+      });
+  });
 };
