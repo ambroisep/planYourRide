@@ -1,6 +1,7 @@
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 var Gmaps = require('./../GMapsAPI/itinerary');
+var Strava = require('./../StravaAPI/strava');
 var map = {};
 
 module.exports = function (app, express) {
@@ -22,7 +23,7 @@ module.exports = function (app, express) {
     res.send();
   });
 
-   app.get('/trip', function (req, res) {
+  app.get('/trip', function (req, res) {
     Gmaps.getItinerary(map)
       .then(function (itinerary) {
         res.send(itinerary);
@@ -31,4 +32,15 @@ module.exports = function (app, express) {
         res.send(err);
       });
   });
+
+  app.get('/segments', function (req, res) {
+    Strava.getSegments()
+      .then(function (segments) {
+        res.send(segments);
+      })
+      .catch(function (err) {
+        res.send(err);
+      });
+  });
+  
 };
