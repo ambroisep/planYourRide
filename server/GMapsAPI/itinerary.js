@@ -8,7 +8,7 @@ exports.getItinerary = function(params) {
     qs: {
       origin: params.origin,
       destination: params.destination,
-      waypoints: [{location: 'Golden Gate Bridge'}],
+      waypoints: 'daly city',
       mode: 'bicycling',
       key: 'AIzaSyBQs4N37ZBvQGPqcYdZVKUPTvfHS-AKLZQ'
     },

@@ -19,15 +19,13 @@ module.exports = function (app, express) {
   app.post('/trip', function (req, res) {
     map.origin = req.body.startPoint;
     map.destination = req.body.endPoint;
-    console.log(map);
     res.send();
   });
 
    app.get('/trip', function (req, res) {
-    console.log(map);
     Gmaps.getItinerary(map)
-      .then(function (googleMap) {
-        res.send(googleMap);
+      .then(function (itinerary) {
+        res.send(itinerary);
       })
       .catch(function (err) {
         res.send(err);

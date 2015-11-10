@@ -8,16 +8,20 @@ angular.module('planYourRide.directionRenderer', [])
         console.log(resp);
         var mapOptions = {
             zoom: 4,
-            center: 'san francisco'
+            center: resp.routes[0].legs[0].start_location
         };
         var backgroundMap = new google.maps.Map(document.getElementById('map'), mapOptions);
         var directionsDisplay = new google.maps.DirectionsRenderer({
           map: backgroundMap
         });
+        var waypts = resp.routes[0].legs.reduce(function (wypts, newPoint, index) {
+          if (index > 0) { wypts.push({location: newPoint.start_location}); }
+          return wypts;
+        }, []);
         var request = {
-          destination: 'sausalito',
-          origin: 'san francisco',
-          waypoints: [{location: 'Golden Gate Bridge'}, {location: 'Tiburon'}],
+          destination: resp.routes[0].legs[resp.routes[0].legs.length - 1].end_location,
+          origin: resp.routes[0].legs[0].start_location,
+          waypoints: waypts,
           travelMode: google.maps.TravelMode.BICYCLING,
           optimizeWaypoints: true
         };
