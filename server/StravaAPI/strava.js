@@ -18,7 +18,6 @@ var url = 'https://www.strava.com/api/v3/segments/explore'
 exports.getSegments = function(startPoint, duration, direction) {
   direction = direction || [0.6, 0.6, 0.6, 0.6]; //NB : [South, West, North, East]
   var bounds = calculate_boundries(startPoint, duration, direction);
-  console.log(bounds);
   var parameters = {
     uri: url,
     qs: {

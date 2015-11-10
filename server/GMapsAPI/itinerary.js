@@ -1,13 +1,11 @@
 var httpAsynch = require('request-promise');
 
-var url = 'https://maps.googleapis.com/maps/api/directions/json';
-
 exports.getItinerary = function(params) {
   var parameters = {
-    uri: url,
+    uri: 'https://maps.googleapis.com/maps/api/directions/json',
     qs: {
-      origin: params.origin || '944 Market Street',
-      destination: params.destination || '944 Market Street',
+      origin: params.origin.lat + ',' + params.origin.lng,
+      destination: params.destination.lat + ',' + params.destination.lng,
       waypoints: 'daly city',
       mode: 'bicycling',
       key: 'AIzaSyBQs4N37ZBvQGPqcYdZVKUPTvfHS-AKLZQ'
@@ -17,14 +15,26 @@ exports.getItinerary = function(params) {
   return httpAsynch(parameters);
 };
 
-exports.getMap = function(params) {
+// exports.getMap = function(params) {
+//   var parameters = {
+//     uri: 'https://www.google.com/maps/embed/v1/directions',
+//     qs: {
+//       origin: params.origin,
+//       destination: params.destination,
+//       mode: 'bicycling',
+//       key: 'AIzaSyD23psOeUzyr1lGl2pPZDc0vBxPgW0lsPY'
+//     },
+//     json: true
+//   }
+//   return httpAsynch(parameters);
+// };
+
+exports.getCoords = function(string) {
   var parameters = {
-    uri: 'https://www.google.com/maps/embed/v1/directions',
+    uri: 'https://maps.googleapis.com/maps/api/geocode/json',
     qs: {
-      origin: params.origin,
-      destination: params.destination,
-      mode: 'bicycling',
-      key: 'AIzaSyD23psOeUzyr1lGl2pPZDc0vBxPgW0lsPY'
+      address: string || '944 Market Street, San Francisco, CA',
+      key: 'AIzaSyBQs4N37ZBvQGPqcYdZVKUPTvfHS-AKLZQ'
     },
     json: true
   }

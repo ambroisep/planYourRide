@@ -18,20 +18,23 @@ module.exports = function (app, express) {
   // });
 
   app.post('/trip', function (req, res) {
-    itinerary.origin = req.body.startPoint;
-    itinerary.destination = req.body.endPoint;
-    itinerary.duration = req.body.hours + req.body.minutes / 60;
-    res.send();
+    Gmaps.getCoords(req.body.startPoint)
+      .then(function (coordsStart) {
+        itinerary.origin = coordsStart.results[0].geometry.location;
+        itinerary.destination = itinerary.origin;
+        itinerary.duration = req.body.hours + req.body.minutes / 60;
+        res.send();
+      })
   });
 
   app.get('/trip', function (req, res) {
     Strava.getSegments(itinerary.origin, itinerary.duration)
       .then(function (segments) {
-        
+        return Gmaps.getItinerary(itinerary);
       })
-    Gmaps.getItinerary(itinerary)
-      .then(function (itinerary) {
-        res.send(itinerary);
+      .then(function (resp) {
+        console.log(resp)
+        res.send(resp);
       })
       .catch(function (err) {
         res.send(err);
