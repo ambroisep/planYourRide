@@ -12,6 +12,20 @@ exports.getItinerary = function(params, callback) {
       key: 'AIzaSyBQs4N37ZBvQGPqcYdZVKUPTvfHS-AKLZQ'
     },
     json: true
-}
+  }
+  return httpAsynch(parameters);
+};
+
+exports.getMap = function(params, callback) {
+  var parameters = {
+    uri: 'https://www.google.com/maps/embed/v1/directions',
+    qs: {
+      origin: params.origin,
+      destination: params.destination,
+      mode: 'bicycling',
+      key: 'AIzaSyD23psOeUzyr1lGl2pPZDc0vBxPgW0lsPY'
+    },
+    json: true
+  }
   return httpAsynch(parameters);
 };
