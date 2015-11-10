@@ -17,7 +17,10 @@ module.exports = function (app, express) {
       });
   });
 
-  app.post('/data', function (req, res) {
-    
+  var map;
+  app.post('/trip', function (req, res) {
+    console.log(req.body);
+    res.send();
+    // origin='San Francisco'&destination='Los Angeles'
   })
 };

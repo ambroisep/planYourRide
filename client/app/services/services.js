@@ -17,7 +17,8 @@ angular.module('planYourRide.services', [])
   var postDemand = function (tripData) {
     return $http({
       method: 'POST',
-      url: '/trip'
+      url: '/trip',
+      data: tripData
     })
     .then(function (resp) {
       return resp.data;
@@ -28,6 +29,7 @@ angular.module('planYourRide.services', [])
   };
 
   return {
-    getDirections: getDirections
+    getDirections: getDirections,
+    postDemand: postDemand
   };
 });
