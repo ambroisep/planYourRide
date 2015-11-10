@@ -2,7 +2,7 @@ var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 var Gmaps = require('./../GMapsAPI/itinerary');
 var Strava = require('./../StravaAPI/strava');
-var map = {};
+var itinerary = {};
 
 module.exports = function (app, express) {
 
@@ -10,21 +10,21 @@ module.exports = function (app, express) {
   app.use(favicon(__dirname + '/../../client/assets/favicon.ico'));
   app.use(express.static(__dirname + '/../../client'));
 
-  app.get('/map', function (req, res) {
-    Gmaps.getMap(map)
-      .then(function(googleMap) {
-        res.send(googleMap);
-      });
-  });
+  // app.get('/map', function (req, res) {
+  //   Gmaps.getMap(itinerary)
+  //     .then(function(googleMap) {
+  //       res.send(googleMap);
+  //     });
+  // });
 
   app.post('/trip', function (req, res) {
-    map.origin = req.body.startPoint;
-    map.destination = req.body.endPoint;
+    itinerary.origin = req.body.startPoint;
+    itinerary.destination = req.body.endPoint;
     res.send();
   });
 
   app.get('/trip', function (req, res) {
-    Gmaps.getItinerary(map)
+    Gmaps.getItinerary(itinerary)
       .then(function (itinerary) {
         res.send(itinerary);
       })
@@ -34,7 +34,7 @@ module.exports = function (app, express) {
   });
 
   app.get('/segments', function (req, res) {
-    Strava.getSegments()
+    Strava.getSegments({lat: 37.6879083, lng: -122.4702074}, [0,1,1,0], 1)
       .then(function (segments) {
         res.send(segments);
       })
@@ -42,5 +42,5 @@ module.exports = function (app, express) {
         res.send(err);
       });
   });
-  
+
 };

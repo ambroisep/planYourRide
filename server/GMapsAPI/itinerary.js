@@ -6,8 +6,8 @@ exports.getItinerary = function(params) {
   var parameters = {
     uri: url,
     qs: {
-      origin: params.origin,
-      destination: params.destination,
+      origin: params.origin || '944 Market Street',
+      destination: params.destination || '944 Market Street',
       waypoints: 'daly city',
       mode: 'bicycling',
       key: 'AIzaSyBQs4N37ZBvQGPqcYdZVKUPTvfHS-AKLZQ'
