@@ -4,7 +4,7 @@ var oneDegreeLat = 110.574; //km
 var oneDegreeLng = function(lat) {
   return 111.320 * Math.cos(lat * 2 * Math.PI / 360);
 };
-var calculate_boundries = function (startPoint, direction, duration) {
+var calculate_boundries = function (startPoint, duration, direction) {
   var speed = 20; //km/h
   var distance = speed * duration;
   return [startPoint.lat - direction[0] * distance / oneDegreeLat,
