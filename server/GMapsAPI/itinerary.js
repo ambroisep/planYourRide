@@ -2,7 +2,7 @@ var httpAsynch = require('request-promise');
 
 var url = 'https://maps.googleapis.com/maps/api/directions/json';
 
-exports.getItinerary = function(params, callback) {
+exports.getItinerary = function(params) {
   var parameters = {
     uri: url,
     qs: {
@@ -16,7 +16,7 @@ exports.getItinerary = function(params, callback) {
   return httpAsynch(parameters);
 };
 
-exports.getMap = function(params, callback) {
+exports.getMap = function(params) {
   var parameters = {
     uri: 'https://www.google.com/maps/embed/v1/directions',
     qs: {
