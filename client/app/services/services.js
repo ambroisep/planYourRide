@@ -4,7 +4,7 @@ angular.module('planYourRide.services', [])
   var getDirections = function () {
     return $http({
       method: 'GET',
-      url: '/test'
+      url: '/trip'
     })
     .then(function (resp) {
       return resp.data;
