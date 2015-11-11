@@ -71,8 +71,12 @@ var findBestItinerary = function (stravaSegments) {
         resp.dd = dd;
         console.log(dd)
         return resp;
-      } else {console.log('too long', dd)};
-    })
+      } else {
+        console.log('too long', dd)
+        resp.dd = dd;
+        return resp;
+      }
+    });
 }
 
   app.post('/trip', function (req, res) {
