@@ -23,13 +23,18 @@ module.exports = function (app, express) {
         itinerary.origin = coordsStart.results[0].geometry.location;
         itinerary.destination = itinerary.origin;
         itinerary.duration = req.body.hours + req.body.minutes / 60;
+        itinerary.waypoints = [];
         res.send();
       })
   });
 
   app.get('/trip', function (req, res) {
     Strava.getSegments(itinerary.origin, itinerary.duration)
-      .then(function (segments) {
+      .then(function (resp) {
+        itinerary.waypoints.push(resp.segments[0].start_latlng.toString())
+        itinerary.waypoints.push(resp.segments[0].end_latlng.toString())
+        itinerary.waypoints.push(resp.segments[1].start_latlng.toString())
+        itinerary.waypoints.push(resp.segments[1].end_latlng.toString())
         return Gmaps.getItinerary(itinerary);
       })
       .then(function (resp) {

@@ -6,7 +6,14 @@ exports.getItinerary = function(params) {
     qs: {
       origin: params.origin.lat + ',' + params.origin.lng,
       destination: params.destination.lat + ',' + params.destination.lng,
-      waypoints: 'daly city',
+      waypoints: params.waypoints.reduce(function (concat, wypt, i) {
+        if (i < params.waypoints.length) { 
+          concat+= (wypt + '|');
+        } else {
+          concat+= wpt;
+        }
+        return concat;
+      }, ''),
       mode: 'bicycling',
       key: 'AIzaSyBQs4N37ZBvQGPqcYdZVKUPTvfHS-AKLZQ'
     },
