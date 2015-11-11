@@ -5,6 +5,10 @@ angular.module('planYourRide.directionRenderer', [])
   $scope.retrieveDirection = function () {
     Directions.getDirections()
       .then(function(resp) {
+        $scope.dd = resp.dd;
+        $scope.dd.km = $scope.dd.distance / 1000;
+        $scope.dd.hours = Math.floor($scope.dd.duration / 3600);
+        $scope.dd.minutes = Math.floor(($scope.dd.duration - $scope.dd.hours * 3600) / 60);
         var mapOptions = {
             zoom: 4,
             center: resp.routes[0].legs[0].start_location

@@ -17,6 +17,33 @@ module.exports = function (app, express) {
   //     });
   // });
 
+var getDistanceAndDuration = function (googleItinerary) {
+  return googleItinerary.routes.reduce(function (timeDistObj, route) {
+    return route.legs.reduce(function(miniTimeDistObj, leg) {
+      miniTimeDistObj.duration+= leg.duration.value;
+      miniTimeDistObj.distance+= leg.distance.value;
+      return miniTimeDistObj;
+    }, timeDistObj)
+  }, {distance: 0, duration: 0});
+};
+
+var findBestItinerary = function (stravaSegments) {
+  itinerary.waypoints = [];
+  itinerary.waypoints.push(stravaSegments.segments[0].start_latlng.toString());
+  itinerary.waypoints.push(stravaSegments.segments[0].end_latlng.toString());
+  itinerary.waypoints.push(stravaSegments.segments[1].start_latlng.toString());
+  itinerary.waypoints.push(stravaSegments.segments[1].end_latlng.toString());
+  return Gmaps.getItinerary(itinerary)
+    .then(function (resp) {
+      var dd = getDistanceAndDuration(resp);
+      if (dd.duration / 3600 < itinerary.duration * 1.1) {
+        resp.dd = dd;
+        console.log(dd)
+        return resp;
+      } else {console.log('too long', dd)};
+    })
+}
+
   app.post('/trip', function (req, res) {
     Gmaps.getCoords(req.body.startPoint)
       .then(function (coordsStart) {
@@ -32,14 +59,10 @@ module.exports = function (app, express) {
   app.get('/trip', function (req, res) {
     Strava.getSegments(itinerary.origin, itinerary.duration, itinerary.directions)
       .then(function (resp) {
-        itinerary.waypoints.push(resp.segments[0].start_latlng.toString())
-        itinerary.waypoints.push(resp.segments[0].end_latlng.toString())
-        itinerary.waypoints.push(resp.segments[1].start_latlng.toString())
-        itinerary.waypoints.push(resp.segments[1].end_latlng.toString())
-        return Gmaps.getItinerary(itinerary);
+        return findBestItinerary(resp);
       })
       .then(function (resp) {
-        console.log(resp)
+        resp.dd = 
         res.send(resp);
       })
       .catch(function (err) {
