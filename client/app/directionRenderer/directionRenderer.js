@@ -5,7 +5,6 @@ angular.module('planYourRide.directionRenderer', [])
   $scope.retrieveDirection = function () {
     Directions.getDirections()
       .then(function(resp) {
-        console.log(resp);
         var mapOptions = {
             zoom: 4,
             center: resp.routes[0].legs[0].start_location
