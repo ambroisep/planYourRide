@@ -8,6 +8,7 @@ angular.module('planYourRide.tripPlanner', [])
     $scope.tripData.endPoint = $scope.tripData.startPoint;
     $scope.tripData.hours = $scope.tripData.hours || 1;
     $scope.tripData.minutes = $scope.tripData.minutes || 0;
+    console.log($scope.tripData)
     Directions.postDemand($scope.tripData)
       .then(function (resp) {
         $location.path('/direction');

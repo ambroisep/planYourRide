@@ -11,6 +11,20 @@
     <div>
       <span>I would like to start from </span>
       <input type="text" ng-model="tripData.startPoint" placeholder="I want to start from">
+    </div>
+    <div>
+      <span>and would be happy to go </span>
+      <select name="singleSelect" ng-model="tripData.directions">
+        <option value=[0,0.5,1,0.5]>North</option>
+        <option value=[0,0,1,1]>North-East</option>
+        <option value=[0.5,0,0.5,1]>East</option>
+        <option value=[1,0,0,1]>South-East</option>
+        <option value=[1,0.5,0,0.5]>South</option>
+        <option value=[1,1,0,0]>South-West</option>
+        <option value=[0.5,1,0.5,0]>West</option>
+        <option value=[0,1,1,0]>North-West</option>
+        <option selected="selected" value=[0.5,0.5,0.5,0.5]>I don't care</option>
+      </select>
       <!-- <span>and finish at </span>
       <input type="text" ng-model="tripData.endPoint" placeholder="I would like to go to"> -->
     </div>

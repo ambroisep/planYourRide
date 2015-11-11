@@ -24,12 +24,13 @@ module.exports = function (app, express) {
         itinerary.destination = itinerary.origin;
         itinerary.duration = req.body.hours + req.body.minutes / 60;
         itinerary.waypoints = [];
+        itinerary.directions = JSON.parse(req.body.directions);
         res.send();
       })
   });
 
   app.get('/trip', function (req, res) {
-    Strava.getSegments(itinerary.origin, itinerary.duration)
+    Strava.getSegments(itinerary.origin, itinerary.duration, itinerary.directions)
       .then(function (resp) {
         itinerary.waypoints.push(resp.segments[0].start_latlng.toString())
         itinerary.waypoints.push(resp.segments[0].end_latlng.toString())
