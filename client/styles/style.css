@@ -59,34 +59,35 @@ body {
   position: absolute;
   top: 0;
   bottom: 0;
-  background-color: rgba(255,255,255,0.3);;
   left: 0;
   right: 0;
   margin: auto;
 }
 
 #app {
-  width: 80%;
-  height: 90%;
+  /*width: 80%;*/
+  height: 50%;
   position: absolute;
   margin: auto;
   left: 0;
   right: 0;
-  margin-top: 75px;
+  background-color: rgba(255,255,255,0.3);
 }
 
 h1 {
   font-size: 36pt;
   font-family: 'Helvetica', serif;
+  color: white;
   text-align: center;
   padding-bottom: 36px;
+  margin: 40px;
 }
 
 h2 {
   font-size: 24pt;
   font-family: 'Helvetica', serif;
-  text-align: left;
-  padding-bottom: 24px;
+  text-align: center;
+  padding: 36px 40px;
 }
 
 input, .planTripForm {
@@ -113,4 +114,5 @@ input[type=number] {
 #map {
     height:420px;
     width:600px;
+    margin: auto;
 }
