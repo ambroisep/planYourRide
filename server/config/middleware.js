@@ -2,6 +2,7 @@ var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 var Gmaps = require('./../GMapsAPI/itinerary');
 var Strava = require('./../StravaAPI/strava');
+var Promise = require('bluebird');
 var itinerary = {};
 
 module.exports = function (app, express) {
@@ -28,55 +29,62 @@ var getDistanceAndDuration = function (googleItinerary) {
 };
 
 var findBestItinerary = function (stravaSegments) {
-  // var itineraries = [];
-  // var asked = 0;
-  // for (var i = 0; i < stravaSegments.segments.length - 1; i++) {
-  //   itinerary.waypoints = [];
-  //   itinerary.waypoints.push(stravaSegments.segments[i].end_latlng.toString());
-  //   itinerary.waypoints.push(stravaSegments.segments[i].start_latlng.toString());
-  //   for (var j = i + 1; j < stravaSegments.segments.length; j++) {
-  //     itinerary.waypoints.push(stravaSegments.segments[j].start_latlng.toString());
-  //     itinerary.waypoints.push(stravaSegments.segments[j].end_latlng.toString());
-  //     asked++;
-  //     Gmaps.getItinerary(itinerary)
-  //       .then(function(response) {
-  //         itineraries.push(response);
-  //         if (itineraries.length === asked) {
-  //           var dds = itineraries.map(function (el) {
-  //             return getDistanceAndDuration (el);
-  //           })
-  //           var bestId = dds.reduce(function (ind, dd, index) {
-  //             var delta = Math.abs(dd.duration - (itinerary.duration * 3600) / (itinerary.duration * 3600));
-  //             if (delta < ind[1]) {
-  //               ind[1] = delta;
-  //               ind[0] = index;
-  //             }
-  //             return ind;
-  //           }, [1, 1]);
-  //           return itineraries[bestId[0]];
-  //         }
-  //       })
-  //   }
-  // }
-
-  itinerary.waypoints = [];
-  itinerary.waypoints.push(stravaSegments.segments[0].end_latlng.toString());
-  itinerary.waypoints.push(stravaSegments.segments[0].start_latlng.toString());
-  itinerary.waypoints.push(stravaSegments.segments[1].start_latlng.toString());
-  itinerary.waypoints.push(stravaSegments.segments[1].end_latlng.toString());
-  return Gmaps.getItinerary(itinerary)
-    .then(function (resp) {
-      var dd = getDistanceAndDuration(resp);
-      if (dd.duration / 3600 < itinerary.duration * 1.1) {
-        resp.dd = dd;
-        console.log(dd)
-        return resp;
-      } else {
-        console.log('too long', dd)
-        resp.dd = dd;
-        return resp;
+  return new Promise(function(resolve, reject) {
+    var itineraries = [];
+    var asked = 0;
+    var maxRoutesTestedToCapAPICalls = 6// stravaSegments.segments.length
+    for (var i = 0; i < maxRoutesTestedToCapAPICalls - 1; i++) {
+      itinerary.waypoints = [];
+      itinerary.waypoints.push(stravaSegments.segments[i].end_latlng.toString());
+      itinerary.waypoints.push(stravaSegments.segments[i].start_latlng.toString());
+      for (var j = i + 1; j < maxRoutesTestedToCapAPICalls; j++) {
+        itinerary.waypoints.push(stravaSegments.segments[j].start_latlng.toString());
+        itinerary.waypoints.push(stravaSegments.segments[j].end_latlng.toString());
+        asked++;
+        Gmaps.getItinerary(itinerary)
+          .then(function(response) {
+            itineraries.push(response);
+            if (itineraries.length === asked) {
+              var dds = itineraries.map(function (el) {
+                return getDistanceAndDuration (el);
+              })
+              var bestId = dds.reduce(function (ind, dd, index) {
+                var delta = Math.abs(dd.duration - (itinerary.duration * 3600) / (itinerary.duration * 3600));
+                if (delta < ind[1]) {
+                  ind[1] = delta;
+                  ind[0] = index;
+                }
+                return ind;
+              }, [1, 1]);
+              itineraries[bestId[0]].dd = dds[bestId[0]];
+              resolve(itineraries[bestId[0]]);
+            }
+          })
+          .catch(function(err) {
+            reject(err);
+          });
       }
-    });
+    }
+  });
+
+  // itinerary.waypoints = [];
+  // itinerary.waypoints.push(stravaSegments.segments[0].end_latlng.toString());
+  // itinerary.waypoints.push(stravaSegments.segments[0].start_latlng.toString());
+  // itinerary.waypoints.push(stravaSegments.segments[1].start_latlng.toString());
+  // itinerary.waypoints.push(stravaSegments.segments[1].end_latlng.toString());
+  // return Gmaps.getItinerary(itinerary)
+  //   .then(function (resp) {
+  //     var dd = getDistanceAndDuration(resp);
+  //     if (dd.duration / 3600 < itinerary.duration * 1.1) {
+  //       resp.dd = dd;
+  //       console.log(dd)
+  //       return resp;
+  //     } else {
+  //       console.log('too long', dd)
+  //       resp.dd = dd;
+  //       return resp;
+  //     }
+  //   });
 }
 
   app.post('/trip', function (req, res) {
@@ -97,7 +105,7 @@ var findBestItinerary = function (stravaSegments) {
         return findBestItinerary(resp);
       })
       .then(function (resp) {
-        resp.dd = 
+        console.log(resp);
         res.send(resp);
       })
       .catch(function (err) {

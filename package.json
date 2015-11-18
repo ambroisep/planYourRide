@@ -5,6 +5,7 @@
   "main": "./server/server.js",
   "pre-commit": "lint",
   "dependencies": {
+    "bluebird": "^3.0.5",
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "request-promise": "^1.0.2",
